@@ -1,0 +1,21 @@
+import homeFilled from "@/assets/icons/HomeFilled.png";
+import homeOutline from "@/assets/icons/HomeOutline.png";
+import calenderFilled from "@/assets/icons/calenderFilled.png";
+import calenderoutline from "@/assets/icons/calenderOutline.png";
+import profileFilled from "@/assets/icons/profileFilled.png";
+import profileOutline from "@/assets/icons/profileOutline.png";
+import statsFilled from "@/assets/icons/statsFilled.png";
+import statsOutline from "@/assets/icons/statsOutline.png";
+
+export const icons = {
+  homeFilled,
+  calenderoutline,
+  statsOutline,
+  profileOutline,
+  homeOutline,
+  calenderFilled,
+  statsFilled,
+  profileFilled,
+} as const;
+
+export type IconKey = keyof typeof icons;
