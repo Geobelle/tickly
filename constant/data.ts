@@ -34,3 +34,9 @@ export const tabsDetails = [
     },
   },
 ];
+export const HOME_USER = {
+  name: "Gina",
+};
+export const INSPIRATION = {
+  text: "Today is a new chance to be a little better than yesterday",
+};

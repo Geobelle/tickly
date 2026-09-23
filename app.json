@@ -32,6 +32,19 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/ComicNeue-Bold.ttf",
+            "./assets/fonts/ComicNeue-BoldItalic.ttf",
+            "./assets/fonts/ComicNeue-Italic.ttf",
+            "./assets/fonts/ComicNeue-Light.ttf",
+            "./assets/fonts/ComicNeue-LightItalic.ttf",
+            "./assets/fonts/ComicNeue-Regular.ttf"
+          ]
+        }
       ]
     ],
     "experiments": {

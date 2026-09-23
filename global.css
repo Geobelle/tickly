@@ -62,10 +62,10 @@
        FONTS
        ─────────────── */
 
-  --font-sans: sans-regular;
-  --font-sans-light: sans-light;
-  --font-sans-medium: sans-medium;
-  --font-sans-semibold: sans-semibold;
-  --font-sans-bold: sans-bold;
-  --font-sans-extrabold: sans-extrabold;
+  --font-sans: comic-regular;
+  --font-sans-light: comic-light;
+  --font-sans-italic: comic-italic;
+  --font-sans-lightItalic: comic-lightItalic;
+  --font-sans-bold: comic-bold;
+  --font-sans-boldItalic: comic-boldItalic;
 }
