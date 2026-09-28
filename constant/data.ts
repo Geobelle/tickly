@@ -40,3 +40,51 @@ export const HOME_USER = {
 export const INSPIRATION = {
   text: "Today is a new chance to be a little better than yesterday",
 };
+
+export const HOME_TASK: Task[] = [
+  {
+    id: "drink-water",
+    icon: icons.water,
+    name: "Drink 8 glasses of water",
+    numberOfTask: 8,
+    numberOfCompletedTask: 8,
+    color: "#DCE9DC",
+    status: "completed",
+  },
+  {
+    id: "read-for-30minutes",
+    icon: icons.book,
+    name: "Read for 30 minutes",
+    numberOfTask: 30,
+    numberOfCompletedTask: 30,
+    color: "#DCE9DC",
+    status: "completed",
+  },
+  {
+    id: "workout",
+    icon: icons.workout,
+    name: "Workout",
+    numberOfTask: 1,
+    numberOfCompletedTask: 0,
+    color: "#DCE9DC",
+    status: "uncompleted",
+  },
+  {
+    id: "plan-tomorrow",
+    icon: icons.smallCalender,
+    name: "Plan tomorrow",
+    numberOfTask: 1,
+    numberOfCompletedTask: 0,
+    color: "#DCE9DC",
+    status: "uncompleted",
+  },
+  {
+    id: "journal",
+    icon: icons.pen,
+    name: "Journal",
+    numberOfTask: 1,
+    numberOfCompletedTask: 0,
+    color: "#DCE9DC",
+    status: "uncompleted",
+  },
+];
