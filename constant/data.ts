@@ -48,7 +48,7 @@ export const HOME_TASK: Task[] = [
     name: "Drink 8 glasses of water",
     numberOfTask: 8,
     numberOfCompletedTask: 8,
-    color: "#DCE9DC",
+
     status: "completed",
   },
   {
@@ -57,7 +57,6 @@ export const HOME_TASK: Task[] = [
     name: "Read for 30 minutes",
     numberOfTask: 30,
     numberOfCompletedTask: 30,
-    color: "#DCE9DC",
     status: "completed",
   },
   {
@@ -66,7 +65,6 @@ export const HOME_TASK: Task[] = [
     name: "Workout",
     numberOfTask: 1,
     numberOfCompletedTask: 0,
-    color: "#DCE9DC",
     status: "uncompleted",
   },
   {
@@ -75,7 +73,6 @@ export const HOME_TASK: Task[] = [
     name: "Plan tomorrow",
     numberOfTask: 1,
     numberOfCompletedTask: 0,
-    color: "#DCE9DC",
     status: "uncompleted",
   },
   {
@@ -84,7 +81,6 @@ export const HOME_TASK: Task[] = [
     name: "Journal",
     numberOfTask: 1,
     numberOfCompletedTask: 0,
-    color: "#DCE9DC",
     status: "uncompleted",
   },
 ];

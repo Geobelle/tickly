@@ -11,7 +11,6 @@ declare global {
     name: string;
     numberOfTask: number;
     numberOfCompletedTask: number;
-    color?: string;
     status: string;
   }
 }
