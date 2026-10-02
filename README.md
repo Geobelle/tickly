@@ -54,3 +54,11 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Authentication setup
+
+Tickly uses a custom email and password flow with email verification and secure session storage.
+
+1. Set `EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY` in `.env` (the variable name is in `.env.example`). The publishable key is intended for client apps; never add a secret key to this Expo project.
+2. In the Clerk Dashboard, enable the Native API, email sign-up, email sign-in, password sign-up, and email verification codes.
+3. Restart the Expo development server after changing environment values. This custom email and password flow works in Expo Go; social sign-in needs provider credentials and a development build before adding its button.

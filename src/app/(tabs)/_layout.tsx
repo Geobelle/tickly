@@ -1,9 +1,21 @@
 import { Tabs } from "expo-router";
+import { Redirect } from "expo-router";
+import { useAuth } from "@clerk/expo";
+import { ActivityIndicator, View } from "react-native";
 import { Image } from "react-native";
 import { tabsDetails } from "../../../constant/data";
 import "../../../global.css";
 
 export default function TabsLayout() {
+  const { isLoaded, isSignedIn } = useAuth();
+  if (!isLoaded) {
+    return (
+      <View className="flex-1 items-center justify-center bg-background">
+        <ActivityIndicator color="#6f2943" />
+      </View>
+    );
+  }
+  if (!isSignedIn) return <Redirect href="/(auth)/sign-in" />;
   return (
     <Tabs
       screenOptions={{
