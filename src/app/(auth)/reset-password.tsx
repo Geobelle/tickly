@@ -1,5 +1,6 @@
 import { useSignIn } from "@clerk/expo";
 import { useRouter } from "expo-router";
+import { usePostHog } from "posthog-react-native";
 import { useState } from "react";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
 import { AuthField, AuthShell, AuthTitle, InlineNotice } from "../../../components/auth/AuthShell";
@@ -9,6 +10,7 @@ type Stage = "email" | "code" | "password";
 
 export default function ResetPassword() {
   const { signIn, fetchStatus } = useSignIn();
+  const posthog = usePostHog();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
@@ -35,6 +37,7 @@ export default function ResetPassword() {
       setNotice(getAuthErrorMessage(sendError) ?? "We couldn’t send a reset code. Please try again shortly.");
       return;
     }
+    posthog?.capture("password_reset_requested");
     setStage("code");
   };
 
@@ -69,6 +72,7 @@ export default function ResetPassword() {
       setError(getAuthErrorMessage(passwordError) ?? "We couldn’t update your password. Please try again.");
       return;
     }
+    posthog?.capture("password_reset_completed");
     if (signIn.status === "complete") {
       const { error: finalizeError } = await signIn.finalize();
       if (finalizeError) {

@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { usePostHog } from "posthog-react-native";
 import { Image, Pressable, Text, View } from "react-native";
 import CheckButton from "./CheckBtn";
+import { posthogLogger } from "../lib/posthog-logger";
 
 const TaskCard = ({
   icon,
@@ -9,12 +11,19 @@ const TaskCard = ({
   numberOfCompletedTask,
   status,
 }: Task) => {
+  const posthog = usePostHog();
   const [taskStatus, setTaskStatus] = useState(status);
 
   const isCompleted = taskStatus === "completed";
 
   const handleCheck = () => {
-    setTaskStatus(isCompleted ? "incomplete" : "completed");
+    const nextStatus = isCompleted ? "incomplete" : "completed";
+    posthog?.capture(isCompleted ? "task_reopened" : "task_completed");
+    posthogLogger.info("task status changed", {
+      event: "task_status_changed",
+      status: nextStatus,
+    });
+    setTaskStatus(nextStatus);
   };
   return (
     <Pressable

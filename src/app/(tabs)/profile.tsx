@@ -1,13 +1,16 @@
 import { styled } from "nativewind";
 import { useClerk, useUser } from "@clerk/expo";
 import { useState } from "react";
+import { usePostHog } from "posthog-react-native";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
+import { posthogLogger } from "../../../lib/posthog-logger";
 const SafeAreaView = styled(RNSafeAreaView);
 
 export default function Profile() {
   const { user } = useUser();
   const { signOut } = useClerk();
+  const posthog = usePostHog();
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -16,6 +19,11 @@ export default function Profile() {
     setMessage("");
     try {
       await signOut();
+      posthog?.capture("sign_out_completed");
+      posthogLogger.info("sign out completed", {
+        event: "sign_out_completed",
+      });
+      posthog?.reset();
     } catch {
       setMessage("We couldn’t sign you out. Please try again.");
     } finally {

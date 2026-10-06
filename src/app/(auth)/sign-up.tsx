@@ -1,5 +1,6 @@
 import { useSignUp } from "@clerk/expo";
 import { Link, useRouter } from "expo-router";
+import { usePostHog } from "posthog-react-native";
 import { useState } from "react";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
 import {
@@ -12,6 +13,7 @@ import { getAuthErrorMessage, isValidEmail } from "../../../lib/auth";
 
 export default function SignUp() {
   const { signUp, fetchStatus } = useSignUp();
+  const posthog = usePostHog();
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -98,6 +100,7 @@ export default function SignUp() {
       );
       return;
     }
+    posthog?.capture("account_created");
     router.replace("/(tabs)");
   };
 
