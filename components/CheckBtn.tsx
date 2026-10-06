@@ -10,7 +10,7 @@ export default function CheckButton({ checked, onPress }: CheckButtonProps) {
     <Pressable
       onPress={onPress}
       className={`w-6 h-6 rounded-full items-center justify-center ${
-        checked ? "bg-[#78977B]" : "border-2 border-[#78977B]"
+        checked ? "bg-[#78977B]" : "border-2 border-[#F7D9CE]"
       }`}
     >
       {checked && <Text className="text-[#FFFDF9] font-bold text-lg">✓</Text>}

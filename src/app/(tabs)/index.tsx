@@ -1,3 +1,4 @@
+import { Link } from "expo-router";
 import { styled } from "nativewind";
 import { FlatList, Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
@@ -56,12 +57,12 @@ export default function TabsIndex() {
             </View>
             <View className="bg-cream rounded-xl  h-fit p-4 border-border border-2">
               <Text className="text-muted-foreground mb-2 text-2xl font-sans-boldItalic">
-                Today's progress
+                Today progress
               </Text>
               <View className="flex flex-row items-center justify-around">
                 <ProgressCircle completed={4} total={8} />
                 <Text className="text-muted-foreground text-2xl w-1/3 text-center font-sans-boldItalic">
-                  you're doing great
+                  you are doing great
                 </Text>
               </View>
             </View>
@@ -69,16 +70,18 @@ export default function TabsIndex() {
               <Text>
                 <TitleText title="Today's tasks" />
               </Text>
-              <Pressable className="list-action">
-                <Image
-                  source={icons.addIcon}
-                  style={{
-                    width: 40,
-                    height: 40,
-                  }}
-                  resizeMode="contain"
-                />
-              </Pressable>
+              <Link href="/(tasks)/taskList" asChild>
+                <Pressable className="">
+                  <Image
+                    source={icons.addIcon}
+                    style={{
+                      width: 40,
+                      height: 40,
+                    }}
+                    resizeMode="contain"
+                  />
+                </Pressable>
+              </Link>
             </View>
           </>
         )}

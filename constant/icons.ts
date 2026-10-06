@@ -2,6 +2,7 @@ import addIcon from "@/assets/icons/Add.png";
 import homeFilled from "@/assets/icons/HomeFilled.png";
 import homeOutline from "@/assets/icons/HomeOutline.png";
 import settingIcon from "@/assets/icons/Settings.png";
+import back from "@/assets/icons/back.png";
 import book from "@/assets/icons/book.png";
 import calenderFilled from "@/assets/icons/calenderFilled.png";
 import calenderoutline from "@/assets/icons/calenderOutline.png";
@@ -30,6 +31,7 @@ export const icons = {
   water,
   workout,
   smallCalender,
+  back,
 } as const;
 
 export type IconKey = keyof typeof icons;

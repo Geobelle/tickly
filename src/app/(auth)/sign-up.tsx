@@ -140,7 +140,7 @@ export default function SignUp() {
         <>
           <AuthField
             label="Full name"
-            placeholder="e.g. Gina Riebelle"
+            placeholder="e.g. Your Name"
             value={name}
             onChangeText={setName}
             error={errors.name}
