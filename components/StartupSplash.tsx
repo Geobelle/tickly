@@ -19,7 +19,7 @@ export default function StartupSplash() {
     // Start splash animation
     Animated.timing(entrance, {
       toValue: 1,
-      duration: 3000,
+      duration: 5000,
       useNativeDriver: true,
     }).start();
 

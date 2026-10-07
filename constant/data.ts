@@ -1,3 +1,4 @@
+import { TICKLY_ICONS } from "./emojis";
 import { icons } from "./icons";
 
 export const tabsDetails = [
@@ -44,7 +45,7 @@ export const INSPIRATION = {
 export const HOME_TASK: Task[] = [
   {
     id: "drink-water",
-    icon: icons.water,
+    icon: TICKLY_ICONS.find((item) => item.id === "water")!.icon,
     name: "Drink 8 glasses of water",
     numberOfTask: 8,
     numberOfCompletedTask: 8,
@@ -53,7 +54,7 @@ export const HOME_TASK: Task[] = [
   },
   {
     id: "read-for-30minutes",
-    icon: icons.book,
+    icon: TICKLY_ICONS.find((item) => item.id === "reading")!.icon,
     name: "Read for 30 minutes",
     numberOfTask: 30,
     numberOfCompletedTask: 30,
@@ -61,7 +62,7 @@ export const HOME_TASK: Task[] = [
   },
   {
     id: "workout",
-    icon: icons.workout,
+    icon: TICKLY_ICONS.find((item) => item.id === "exercise")!.icon,
     name: "Workout",
     numberOfTask: 1,
     numberOfCompletedTask: 0,
@@ -69,7 +70,7 @@ export const HOME_TASK: Task[] = [
   },
   {
     id: "plan-tomorrow",
-    icon: icons.smallCalender,
+    icon: TICKLY_ICONS.find((item) => item.id === "calender")!.icon,
     name: "Plan tomorrow",
     numberOfTask: 1,
     numberOfCompletedTask: 0,
@@ -77,7 +78,7 @@ export const HOME_TASK: Task[] = [
   },
   {
     id: "journal",
-    icon: icons.pen,
+    icon: TICKLY_ICONS.find((item) => item.id === "journal")!.icon,
     name: "Journal",
     numberOfTask: 1,
     numberOfCompletedTask: 0,
