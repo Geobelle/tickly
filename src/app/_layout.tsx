@@ -1,10 +1,11 @@
-import { ClerkProvider, useUser } from "@clerk/expo";
+import { ClerkProvider, useAuth, useUser } from "@clerk/expo";
 import { tokenCache } from "@clerk/expo/token-cache";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { PostHogProvider } from "posthog-react-native";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { posthog } from "../../lib/posthog";
+import StartupSplash from "../../components/StartupSplash";
 import "../../global.css";
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY ?? "";
@@ -34,11 +35,25 @@ export default function RootLayout() {
   const app = (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <PostHogIdentity />
-      <Stack screenOptions={{ headerShown: false }} />
+      <StartupGate />
     </ClerkProvider>
   );
 
   return posthog ? <PostHogProvider client={posthog}>{app}</PostHogProvider> : app;
+}
+
+function StartupGate() {
+  const { isLoaded } = useAuth();
+  const [minimumTimeElapsed, setMinimumTimeElapsed] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setMinimumTimeElapsed(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!minimumTimeElapsed || !isLoaded) return <StartupSplash />;
+
+  return <Stack screenOptions={{ headerShown: false }} />;
 }
 
 function PostHogIdentity() {

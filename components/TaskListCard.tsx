@@ -1,20 +1,22 @@
-import { usePostHog } from "posthog-react-native";
-import { useState } from "react";
 import { Image, Pressable, Text, View } from "react-native";
 import CheckButton from "./CheckBtn";
 
-const TaskListCard = ({ icon, name }: Task) => {
-  const posthog = usePostHog();
+type TaskListCardProps = {
+  icon: any;
+  name: string;
+  selected: boolean;
+  onPress: () => void;
+};
 
-  const [checked, setChecked] = useState(false);
-
+const TaskListCard = ({ icon, name, selected, onPress }: TaskListCardProps) => {
   return (
     <Pressable
-      className={` p-4 mb-2 border-b-2 border-[#F7D9CE]  rounded-3xl  `}
+      onPress={onPress}
+      className={`mb-2 rounded-3xl border-b-2 border-[#F7D9CE] p-4 `}
     >
       <View className="flex flex-row items-center justify-between gap-4">
         <View className="flex flex-row gap-2">
-          <View className="bg-[#FEF8F1] rounded-full w-10 h-10 flex items-center justify-center">
+          <View className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FEF8F1]">
             <Image
               source={icon}
               style={{
@@ -31,7 +33,7 @@ const TaskListCard = ({ icon, name }: Task) => {
           </View>
         </View>
 
-        <CheckButton checked={checked} onPress={() => setChecked(!checked)} />
+        <CheckButton checked={selected} onPress={onPress} />
       </View>
     </Pressable>
   );

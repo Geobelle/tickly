@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { usePostHog } from "posthog-react-native";
+import { useState } from "react";
 import { Image, Pressable, Text, View } from "react-native";
-import CheckButton from "./CheckBtn";
 import { posthogLogger } from "../lib/posthog-logger";
+import CheckButton from "./CheckBtn";
 
 const TaskCard = ({
   icon,
@@ -27,7 +27,7 @@ const TaskCard = ({
   };
   return (
     <Pressable
-      className={` p-4 mb-2  rounded-3xl  ${isCompleted ? "bg-[#DCE9DC] border-0" : "bg-[#FFF4E9] border-2 border-[#EADBD7]"}`}
+      className={` p-4 mb-2  rounded-3xl  ${isCompleted ? "bg-[#F1F7E7] border-0" : "bg-[#FFF4E9] border-2 border-[#EADBD7]"}`}
     >
       <View className="flex flex-row items-center gap-4">
         <CheckButton checked={isCompleted} onPress={handleCheck} />
