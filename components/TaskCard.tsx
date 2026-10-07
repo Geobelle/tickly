@@ -27,13 +27,13 @@ const TaskCard = ({
   };
   return (
     <Pressable
-      className={` p-4 mb-2  rounded-3xl  ${isCompleted ? "bg-[#F1F7E7] border-0" : "bg-[#FFF4E9] border-2 border-[#EADBD7]"}`}
+      className={` p-4 mb-2  rounded-3xl  ${isCompleted ? "bg-[#F1F7E7] border-0 shadow-xs " : "bg-[#FFF4E9] border-2 border-[#EADBD7]"}`}
     >
       <View className="flex flex-row items-center gap-4">
         <CheckButton checked={isCompleted} onPress={handleCheck} />
 
         <View className="flex flex-row gap-2">
-          <View className="bg-[#f9e8e3] rounded-full w-10 h-10 flex items-center justify-center">
+          <View className="bg-background rounded-full w-10 h-10 flex items-center justify-center">
             <Image
               source={icon}
               style={{

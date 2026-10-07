@@ -1,8 +1,6 @@
-import { Tabs } from "expo-router";
-import { Redirect } from "expo-router";
 import { useAuth } from "@clerk/expo";
-import { ActivityIndicator, View } from "react-native";
-import { Image } from "react-native";
+import { Redirect, Tabs } from "expo-router";
+import { ActivityIndicator, Image, View } from "react-native";
 import { tabsDetails } from "../../../constant/data";
 import "../../../global.css";
 
