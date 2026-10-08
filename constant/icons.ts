@@ -1,4 +1,5 @@
 import addIcon from "@/assets/icons/Add.png";
+import repeat from "@/assets/icons/Group.png";
 import homeFilled from "@/assets/icons/HomeFilled.png";
 import homeOutline from "@/assets/icons/HomeOutline.png";
 import settingIcon from "@/assets/icons/Settings.png";
@@ -12,8 +13,6 @@ import profileOutline from "@/assets/icons/profileOutline.png";
 import smallCalender from "@/assets/icons/smallCalender.png";
 import statsFilled from "@/assets/icons/statsFilled.png";
 import statsOutline from "@/assets/icons/statsOutline.png";
-import water from "@/assets/icons/water.png";
-import workout from "@/assets/icons/workout.png";
 
 export const icons = {
   homeFilled,
@@ -28,10 +27,9 @@ export const icons = {
   addIcon,
   book,
   pen,
-  water,
-  workout,
   smallCalender,
   back,
+  repeat,
 } as const;
 
 export type IconKey = keyof typeof icons;

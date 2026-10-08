@@ -53,15 +53,15 @@ const CustomTask = () => {
             <Image
               source={images.achieve}
               style={{
-                width: 320,
-                height: 320,
+                width: 250,
+                height: 250,
               }}
               resizeMode="contain"
             />
           </View>
 
           <View>
-            <Text className="font-sans-bold text-lg text-primary">
+            <Text className="font-sans-bold mb-2 text-lg text-primary">
               Task Name
             </Text>
             <TextInput
@@ -73,19 +73,21 @@ const CustomTask = () => {
           </View>
 
           <View className="mt-4">
-            <Text className="font-sans-bold text-lg text-primary">Repeat</Text>
+            <Text className="font-sans-bold mb-2 text-lg text-primary">
+              Repeat
+            </Text>
             <RepeatDropdown />
           </View>
 
           <View className="mt-4">
-            <Text className="font-sans-bold text-lg text-primary">Icon</Text>
+            <Text className="font-sans-bold  text-lg text-primary">Icon</Text>
             <EmojiPicker
               selectedIcon={selectedIcon}
               onSelect={setSelectedIcon}
             />
           </View>
           <View className="mt-4">
-            <Text className="font-sans-bold text-lg text-primary">
+            <Text className="font-sans-bold text-lg mb-2 text-primary">
               Time{" "}
               <Text className="font-sans text-muted-foreground">
                 (optional)
