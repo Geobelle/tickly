@@ -6,7 +6,7 @@ const SafeAreaView = styled(RNSafeAreaView);
 export default function Stats() {
   return (
     <SafeAreaView className="bg-background flex-1 p-5">
-      <Text className="text-xl font-bold text-success">stats</Text>
+      <Text className="text-xl font-bold text-foreground">Stats</Text>
     </SafeAreaView>
   );
 }

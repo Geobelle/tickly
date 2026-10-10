@@ -85,3 +85,28 @@ export const HOME_TASK: Task[] = [
     status: "uncompleted",
   },
 ];
+
+/**
+ * Small, date-specific mock history for the calendar. Dates are based on the
+ * device's local calendar so the examples remain recent as time passes.
+ * Tasks missing from a date's list are treated as not completed that day.
+ */
+export function getLocalDateKey(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+function localDateOffset(days: number): string {
+  const date = new Date();
+  date.setHours(12, 0, 0, 0);
+  date.setDate(date.getDate() + days);
+  return getLocalDateKey(date);
+}
+
+export const TASK_HISTORY: Record<string, string[]> = {
+  [localDateOffset(-1)]: ["drink-water", "read-for-30minutes", "journal"],
+  [localDateOffset(-2)]: ["drink-water", "workout"],
+};

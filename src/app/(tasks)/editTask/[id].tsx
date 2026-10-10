@@ -5,6 +5,7 @@ import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import ProgressBar from "../../../../components/ProgressBar";
 import { HOME_TASK } from "../../../../constant/data";
 import { icons } from "../../../../constant/icons";
+
 const SafeAreaView = styled(RNSafeAreaView);
 
 const TaskDetails = () => {
@@ -14,7 +15,7 @@ const TaskDetails = () => {
     <SafeAreaView className="flex-1 bg-background p-8">
       <Pressable
         onPress={() => {
-          router.push("/taskList");
+          router.back();
         }}
         className="z-50 p-2"
       >

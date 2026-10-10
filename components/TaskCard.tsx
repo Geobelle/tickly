@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { usePostHog } from "posthog-react-native";
 import { useState } from "react";
 import { Image, Pressable, Text, View } from "react-native";
@@ -10,6 +11,7 @@ const TaskCard = ({
   numberOfTask,
   numberOfCompletedTask,
   status,
+  id,
 }: Task) => {
   const posthog = usePostHog();
   const [taskStatus, setTaskStatus] = useState(status);
@@ -28,6 +30,11 @@ const TaskCard = ({
   return (
     <Pressable
       className={` p-4 mb-2  rounded-3xl  ${isCompleted ? "bg-[#F1F7E7] border-0 shadow-xs " : "bg-[#FFF4E9] border-2 border-[#EADBD7]"}`}
+      onPress={() => {
+        if (id) {
+          router.push(`/(tasks)/editTask/${id}`);
+        }
+      }}
     >
       <View className="flex flex-row items-center gap-4">
         <CheckButton checked={isCompleted} onPress={handleCheck} />
