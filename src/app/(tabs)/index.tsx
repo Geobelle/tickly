@@ -68,7 +68,13 @@ export default function TabsIndex() {
                   Today progress
                 </Text>
                 <View className="flex flex-row items-center justify-around">
-                  <ProgressCircle completed={4} total={8} />
+                  <ProgressCircle
+                    completed={
+                      HOME_TASK.filter((task) => task.status === "completed")
+                        .length
+                    }
+                    total={HOME_TASK.length}
+                  />
                   <Text className="text-muted-foreground text-2xl w-1/3 text-center font-sans-boldItalic">
                     you are doing great
                   </Text>

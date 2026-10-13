@@ -1,7 +1,7 @@
 import { ClerkProvider, useAuth, useUser } from "@clerk/expo";
 import { tokenCache } from "@clerk/expo/token-cache";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
+import { SplashScreen, Stack, usePathname } from "expo-router";
 import { PostHogProvider } from "posthog-react-native";
 import { useEffect, useState } from "react";
 import { posthog } from "../../lib/posthog";
@@ -39,7 +39,13 @@ export default function RootLayout() {
     </ClerkProvider>
   );
 
-  return posthog ? <PostHogProvider client={posthog}>{app}</PostHogProvider> : app;
+  return posthog ? (
+    <PostHogProvider client={posthog} autocapture={false}>
+      {app}
+    </PostHogProvider>
+  ) : (
+    app
+  );
 }
 
 function StartupGate() {
@@ -53,7 +59,12 @@ function StartupGate() {
 
   if (!minimumTimeElapsed || !isLoaded) return <StartupSplash />;
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <>
+      <PostHogScreenTracker />
+      <Stack screenOptions={{ headerShown: false }} />
+    </>
+  );
 }
 
 function PostHogIdentity() {
@@ -62,15 +73,18 @@ function PostHogIdentity() {
   useEffect(() => {
     if (!isLoaded || !user) return;
 
-    posthog?.identify(user.id, {
-      $set: {
-        ...(user.primaryEmailAddress?.emailAddress
-          ? { email: user.primaryEmailAddress.emailAddress }
-          : {}),
-        ...(user.fullName ? { name: user.fullName } : {}),
-      },
-    });
+    posthog?.identify(user.id);
   }, [isLoaded, user]);
+
+  return null;
+}
+
+function PostHogScreenTracker() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (pathname && pathname !== "/") posthog?.screen(pathname);
+  }, [pathname]);
 
   return null;
 }

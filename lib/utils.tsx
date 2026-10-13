@@ -16,7 +16,7 @@ export default function ProgressCircle({
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
 
-  const progress = completed / total;
+  const progress = total > 0 ? Math.min(Math.max(completed / total, 0), 1) : 0;
   const strokeDashoffset = circumference * (1 - progress);
 
   return (
