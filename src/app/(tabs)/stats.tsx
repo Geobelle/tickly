@@ -10,7 +10,9 @@ const SafeAreaView = styled(RNSafeAreaView);
 export default function Stats() {
   return (
     <SafeAreaView className="bg-background flex-1 p-5 ">
-      <Text className="text-xl font-bold mb-3 text-foreground">Stats</Text>
+      <Text className="text-3xl font-sans-bold mb-3 text-foreground">
+        Stats
+      </Text>
       <StatsBar />
       <View className="mt-8">
         <CompletionRate

@@ -28,14 +28,14 @@ export default function TabsIndex() {
                 <Text className="text-muted-foreground text-xl font-sans-boldItalic">
                   Good Morning,
                 </Text>
-                <Image
+                {/* <Image
                   source={icons.settingIcon}
                   style={{
                     width: 24,
                     height: 24,
                   }}
                   resizeMode="contain"
-                />
+                /> */}
               </View>
               <View className="mt-4 flex flex-row items-center gap-4">
                 <Text className="text-primary text-5xl font-sans-bold">
