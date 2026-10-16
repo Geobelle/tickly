@@ -1,6 +1,9 @@
+import { useAuth } from "@clerk/expo";
 import { router } from "expo-router";
 import { styled } from "nativewind";
 import { useState } from "react";
+import { TICKLY_ICONS } from "../../../constant/emojis";
+import { createHabit } from "../../../services/habits";
 
 import {
   Image,
@@ -14,7 +17,7 @@ import {
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import EmojiPicker from "../../../components/EmojiPicker";
 import RepeatDropdown from "../../../components/ReapeatDropdown";
-import TimeInput from "../../../components/TimeInput";
+
 import { icons } from "../../../constant/icons";
 import images from "../../../constant/images";
 const SafeAreaView = styled(RNSafeAreaView);
@@ -22,7 +25,57 @@ const SafeAreaView = styled(RNSafeAreaView);
 const CustomTask = () => {
   const [text, onChangeText] = useState("");
   const [selectedIcon, setSelectedIcon] = useState("");
-  const [time, setTime] = useState<Date>();
+  const { getToken, isSignedIn } = useAuth();
+
+  const [repeat, setRepeat] = useState("Daily");
+  const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSave = async () => {
+    setError("");
+
+    if (!text.trim()) {
+      setError("Please enter a task name.");
+      return;
+    }
+
+    const iconId = TICKLY_ICONS.find((item) => item.id === selectedIcon)?.id;
+
+    if (!iconId) {
+      setError("Please select an icon.");
+      return;
+    }
+
+    if (!isSignedIn) {
+      setError("Please sign in before saving a task.");
+      return;
+    }
+
+    setIsSaving(true);
+
+    try {
+      const token = await getToken();
+
+      if (!token) {
+        throw new Error("Unable to verify your session. Please sign in again.");
+      }
+
+      await createHabit(token, {
+        name: text.trim(),
+        icon: iconId,
+        repeat: repeat.toLowerCase(),
+      });
+
+      router.replace("/taskList");
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Unable to save your task.",
+      );
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-background p-8">
       <View className="relative flex-row items-center">
@@ -76,7 +129,7 @@ const CustomTask = () => {
             <Text className="font-sans-bold mb-2 text-lg text-primary">
               Repeat
             </Text>
-            <RepeatDropdown />
+            <RepeatDropdown value={repeat} onChange={setRepeat} />
           </View>
 
           <View className="mt-4">
@@ -86,23 +139,19 @@ const CustomTask = () => {
               onSelect={setSelectedIcon}
             />
           </View>
-          <View className="mt-4">
-            <Text className="font-sans-bold text-lg mb-2 text-primary">
-              Time{" "}
-              <Text className="font-sans text-muted-foreground">
-                (optional)
-              </Text>
-            </Text>
-            <TimeInput value={time} onChange={setTime} />
-          </View>
+
+          {error ? (
+            <Text className="mt-3 text-center text-red-600">{error}</Text>
+          ) : null}
 
           <Pressable
-            onPress={() => {
-              router.push("/");
-            }}
-            className="h-14  mt-8 w-2/3 self-center flex-row items-center justify-center rounded-full bg-primary px-3"
+            onPress={handleSave}
+            disabled={isSaving}
+            className="mt-8 h-14 w-2/3 self-center flex-row items-center justify-center rounded-full bg-primary px-3"
           >
-            <Text className="font-sans-bold text-xl text-white">Save Task</Text>
+            <Text className="font-sans-bold text-xl text-white">
+              {isSaving ? "Saving..." : "Save Task"}
+            </Text>
           </Pressable>
         </View>
       </TouchableWithoutFeedback>

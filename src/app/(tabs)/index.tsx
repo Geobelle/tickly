@@ -1,3 +1,8 @@
+import { useAuth } from "@clerk/expo";
+import { useEffect, useState } from "react";
+import { TICKLY_ICONS } from "../../../constant/emojis";
+import { getHabitCompletions, getHabits } from "../../../services/habits";
+
 import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
 import { styled } from "nativewind";
@@ -5,13 +10,72 @@ import { FlatList, Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import TaskCard from "../../../components/TaskCard";
 import TitleText from "../../../components/TitleText";
-import { HOME_TASK, HOME_USER, INSPIRATION } from "../../../constant/data";
+import { HOME_USER, INSPIRATION } from "../../../constant/data";
 import { icons } from "../../../constant/icons";
 import images from "../../../constant/images";
 import ProgressCircle from "../../../lib/utils";
 const SafeAreaView = styled(RNSafeAreaView);
 
 export default function TabsIndex() {
+  const { getToken, isLoaded, isSignedIn } = useAuth();
+
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    let cancelled = false;
+
+    const loadHabits = async () => {
+      try {
+        if (!isSignedIn) {
+          if (!cancelled) setTasks([]);
+          return;
+        }
+
+        const token = await getToken();
+        if (!token) return;
+
+        const habits = await getHabits(token);
+        const now = new Date();
+
+        const today = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        const completions = await getHabitCompletions(token, today);
+
+        const completionMap = new Map(
+          completions.map((item) => [item.habitId, item.completed]),
+        );
+        const loadedTasks: Task[] = habits.map((habit) => ({
+          id: habit.id,
+          name: habit.name,
+          icon:
+            TICKLY_ICONS.find((item) => item.id === habit.icon)?.icon ??
+            TICKLY_ICONS[0].icon,
+          status: completionMap.get(habit.id) ? "completed" : "uncompleted",
+          repeat: habit.repeat,
+        }));
+
+        if (!cancelled) setTasks(loadedTasks);
+      } catch (error) {
+        console.error("Failed to load home habits:", error);
+      } finally {
+        if (!cancelled) setIsLoading(false);
+      }
+    };
+
+    loadHabits();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isLoaded, isSignedIn]);
+
   return (
     <LinearGradient
       colors={["#FFF8F3", "#FFF4E9", "#F7EDE5", "#E9EDE5"]}
@@ -70,10 +134,9 @@ export default function TabsIndex() {
                 <View className="flex flex-row items-center justify-around">
                   <ProgressCircle
                     completed={
-                      HOME_TASK.filter((task) => task.status === "completed")
-                        .length
+                      tasks.filter((task) => task.status === "completed").length
                     }
-                    total={HOME_TASK.length}
+                    total={tasks.length}
                   />
                   <Text className="text-muted-foreground text-2xl w-1/3 text-center font-sans-boldItalic">
                     you are doing great
@@ -99,11 +162,26 @@ export default function TabsIndex() {
               </View>
             </>
           )}
-          data={HOME_TASK}
+          data={tasks}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <TaskCard {...item} />}
+          renderItem={({ item }) => (
+            <TaskCard
+              {...item}
+              onStatusChange={(id, status) => {
+                setTasks((currentTasks) =>
+                  currentTasks.map((task) =>
+                    task.id === id ? { ...task, status } : task,
+                  ),
+                );
+              }}
+            />
+          )}
           showsVerticalScrollIndicator={false}
-          ListEmptyComponent={<Text>No upcoming tasks currently</Text>}
+          ListEmptyComponent={
+            <Text className="text-muted-foreground">
+              {isLoading ? "Loading tasks..." : "No upcoming tasks currently"}
+            </Text>
+          }
           contentContainerClassName="pb-20"
         />
       </SafeAreaView>

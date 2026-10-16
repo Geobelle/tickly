@@ -5,13 +5,13 @@ declare global {
     focused: boolean;
     icon: ImageSourcePropType;
   }
+
   interface Task {
     id: string;
     icon: ImageSourcePropType;
     name: string;
-    numberOfTask: number;
-    numberOfCompletedTask: number;
-    status: string;
+    status: "completed" | "in-progress" | "uncompleted";
+    repeat: string;
   }
 }
 

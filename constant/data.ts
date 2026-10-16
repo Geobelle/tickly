@@ -1,4 +1,3 @@
-import { TICKLY_ICONS } from "./emojis";
 import { icons } from "./icons";
 
 export const tabsDetails = [
@@ -42,49 +41,43 @@ export const INSPIRATION = {
   text: "Today is a new chance to be a little better than yesterday",
 };
 
-export const HOME_TASK: Task[] = [
-  {
-    id: "drink-water",
-    icon: TICKLY_ICONS.find((item) => item.id === "water")!.icon,
-    name: "Drink 8 glasses of water",
-    numberOfTask: 8,
-    numberOfCompletedTask: 8,
+// export const HOME_TASK: Task[] = [
+//   {
+//     id: "drink-water",
+//     icon: TICKLY_ICONS.find((item) => item.id === "water")!.icon,
+//     name: "Drink 8 glasses of water",
 
-    status: "completed",
-  },
-  {
-    id: "read-for-30minutes",
-    icon: TICKLY_ICONS.find((item) => item.id === "reading")!.icon,
-    name: "Read for 30 minutes",
-    numberOfTask: 30,
-    numberOfCompletedTask: 30,
-    status: "completed",
-  },
-  {
-    id: "workout",
-    icon: TICKLY_ICONS.find((item) => item.id === "exercise")!.icon,
-    name: "Workout",
-    numberOfTask: 1,
-    numberOfCompletedTask: 0,
-    status: "uncompleted",
-  },
-  {
-    id: "plan-tomorrow",
-    icon: TICKLY_ICONS.find((item) => item.id === "calender")!.icon,
-    name: "Plan tomorrow",
-    numberOfTask: 1,
-    numberOfCompletedTask: 0,
-    status: "uncompleted",
-  },
-  {
-    id: "journal",
-    icon: TICKLY_ICONS.find((item) => item.id === "journal")!.icon,
-    name: "Journal",
-    numberOfTask: 1,
-    numberOfCompletedTask: 0,
-    status: "uncompleted",
-  },
-];
+//     status: "completed",
+//   },
+//   {
+//     id: "read-for-30minutes",
+//     icon: TICKLY_ICONS.find((item) => item.id === "reading")!.icon,
+//     name: "Read for 30 minutes",
+
+//     status: "completed",
+//   },
+//   {
+//     id: "workout",
+//     icon: TICKLY_ICONS.find((item) => item.id === "exercise")!.icon,
+//     name: "Workout",
+
+//     status: "uncompleted",
+//   },
+//   {
+//     id: "plan-tomorrow",
+//     icon: TICKLY_ICONS.find((item) => item.id === "calender")!.icon,
+//     name: "Plan tomorrow",
+
+//     status: "uncompleted",
+//   },
+//   {
+//     id: "journal",
+//     icon: TICKLY_ICONS.find((item) => item.id === "journal")!.icon,
+//     name: "Journal",
+
+//     status: "uncompleted",
+//   },
+// ];
 
 /**
  * Small, date-specific mock history for the calendar. Dates are based on the
